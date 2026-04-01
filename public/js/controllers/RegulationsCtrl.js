@@ -1,24 +1,39 @@
-// RegulationsCtrl — Scrollytelling with Intersection Observer (NEVER window.onscroll)
+// RegulationsCtrl — Flag scrollytelling + Qualifying slider + Pit Lane cards
 angular.module('f1App')
   .controller('RegulationsCtrl', ['$scope', 'DataService', '$timeout', function($scope, DataService, $timeout) {
 
-    $scope.regulations = [];
-    $scope.activeFlag  = null;
-    $scope.activeReg   = null;
+    $scope.regulations     = [];
+    $scope.activeFlag      = null;
+    $scope.activeReg       = null;
+    $scope.qualifyingRules = [];
+    $scope.activeQual      = null;
+    $scope.activeQualIdx   = 0;
+    $scope.pitRules        = [];
 
+    // Load all data in parallel
     DataService.getRegulations().then(function(data) {
       $scope.regulations = data;
       if (data.length > 0) {
         $scope.activeFlag = data[0].flag_color;
         $scope.activeReg  = data[0];
       }
-      // Set up Intersection Observer after DOM renders
-      $timeout(function() {
-        setupObserver();
-      }, 150);
+      $timeout(function() { setupFlagObserver(); }, 150);
     });
 
-    function setupObserver() {
+    DataService.getQualifying().then(function(data) {
+      $scope.qualifyingRules = data;
+      if (data.length > 0) {
+        $scope.activeQual    = data[0];
+        $scope.activeQualIdx = 0;
+      }
+    });
+
+    DataService.getPitRules().then(function(data) {
+      $scope.pitRules = data;
+    });
+
+    // ─── Flag Scrollytelling ───────────────────
+    function setupFlagObserver() {
       var sections = document.querySelectorAll('.flag-section');
       if (!sections.length) return;
 
@@ -39,8 +54,7 @@ angular.module('f1App')
         rootMargin: '-10% 0px -10% 0px'
       });
 
-      sections.forEach(function(section) { observer.observe(section); });
-
+      sections.forEach(function(s) { observer.observe(s); });
       $scope.$on('$destroy', function() { observer.disconnect(); });
     }
 
@@ -51,4 +65,18 @@ angular.module('f1App')
         'color': $scope.activeReg.text_color
       };
     };
+
+    // ─── Qualifying Slider ─────────────────────
+    $scope.setQual = function(rule) {
+      $scope.activeQual    = rule;
+      $scope.activeQualIdx = $scope.qualifyingRules.indexOf(rule);
+    };
+
+    $scope.setQualByIdx = function(idx) {
+      var i = parseInt(idx, 10);
+      if ($scope.qualifyingRules[i]) {
+        $scope.activeQual = $scope.qualifyingRules[i];
+      }
+    };
+
   }]);

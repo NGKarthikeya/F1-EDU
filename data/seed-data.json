@@ -7,10 +7,12 @@
       "displacement": "1.5L",
       "horsepower": 350,
       "top_speed": 290,
-      "image_url": "/cars/Alfa Romeo 158 Alfetta.jpg",
+      "svg_file": "car-1950s.svg",
+      "image_url": "/public/svg/car-1950s.svg",
       "year_start": 1950,
       "year_end": 1959,
-      "highlight": "Front-engined, narrow body, exposed wheels with drum brakes. Dominated the first two F1 seasons."
+      "highlight": "Front-engined, narrow body, exposed wheels with drum brakes. Dominated the first two F1 seasons.",
+      "safety_milestone": null
     },
     {
       "era": "1960s",
@@ -19,10 +21,12 @@
       "displacement": "3.0L",
       "horsepower": 410,
       "top_speed": 290,
-      "image_url": "/cars/Lotus 49 Ford.jpg",
+      "svg_file": "car-1960s.svg",
+      "image_url": "/public/svg/car-1960s.svg",
       "year_start": 1960,
       "year_end": 1969,
-      "highlight": "Engine became a structural element. First rear-engined era. Introduced aerofoil wings in 1968."
+      "highlight": "Engine became a structural element. First rear-engined era. Introduced aerofoil wings in 1968.",
+      "safety_milestone": null
     },
     {
       "era": "1970s",
@@ -31,10 +35,12 @@
       "displacement": "3.0L",
       "horsepower": 460,
       "top_speed": 300,
-      "image_url": "/cars/Tyrrell P34.jpg",
+      "svg_file": "car-1970s.svg",
+      "image_url": "/public/svg/car-1970s.svg",
       "year_start": 1970,
       "year_end": 1979,
-      "highlight": "Ground-effect aerodynamics. Six-wheel Tyrrell experiment. Slick tyres replaced treaded rubber."
+      "highlight": "Ground-effect aerodynamics. Six-wheel Tyrrell experiment. Slick tyres replaced treaded rubber.",
+      "safety_milestone": "Mandatory Nomex fire-proof suits introduced (1975). First fireproof overalls for all drivers."
     },
     {
       "era": "1980s",
@@ -43,10 +49,12 @@
       "displacement": "1.5L Turbo",
       "horsepower": 1000,
       "top_speed": 330,
-      "image_url": "/cars/Williams FW14B Renault.jpg",
+      "svg_file": "car-1980s.svg",
+      "image_url": "/public/svg/car-1980s.svg",
       "year_start": 1980,
       "year_end": 1989,
-      "highlight": "Turbo era peak — 1000+ bhp. Carbon-fibre monocoque introduced. Ground effect banned in 1983."
+      "highlight": "Turbo era peak — 1000+ bhp. Carbon-fibre monocoque introduced. Ground effect banned in 1983.",
+      "safety_milestone": "McLaren introduces the carbon-fibre monocoque survival cell (1981) — the chassis that absorbs crash energy instead of the driver."
     },
     {
       "era": "1990s",
@@ -55,10 +63,12 @@
       "displacement": "3.5L",
       "horsepower": 770,
       "top_speed": 340,
-      "image_url": "/cars/McLaren_MP4_Honda.jpg",
+      "svg_file": "car-1990s.svg",
+      "image_url": "/public/svg/car-1990s.svg",
       "year_start": 1990,
       "year_end": 1999,
-      "highlight": "Active suspension, traction control, ABS. V10 engines scream at 18,000 RPM. Semi-auto gearboxes."
+      "highlight": "Active suspension, traction control, ABS. V10 engines scream at 18,000 RPM. Semi-auto gearboxes.",
+      "safety_milestone": "FIA safety overhaul after Senna & Ratzenberger at Imola 1994 — raised cockpit sides, softer tyre compounds, gravel traps replaced by asphalt runoffs."
     },
     {
       "era": "2000s",
@@ -67,10 +77,12 @@
       "displacement": "3.0L",
       "horsepower": 900,
       "top_speed": 360,
-      "image_url": "/cars/Ferrari F2004.jpg",
+      "svg_file": "car-2000s.svg",
+      "image_url": "/public/svg/car-2000s.svg",
       "year_start": 2000,
       "year_end": 2009,
-      "highlight": "V10 peak then switch to V8 in 2006. Launch control banned. Grooved tyres replaced by slicks in 2009."
+      "highlight": "V10 peak then switch to V8 in 2006. Launch control banned. Grooved tyres replaced by slicks in 2009.",
+      "safety_milestone": "Mandatory HANS device (2003) — the Head and Neck Support prevents basilar skull fractures, the injury pattern that killed Senna."
     },
     {
       "era": "2010s",
@@ -79,10 +91,12 @@
       "displacement": "1.6L Turbo + ERS",
       "horsepower": 1050,
       "top_speed": 372,
-      "image_url": "/cars/Mercedes W11 EQ Performance.jpg",
+      "svg_file": "car-2010s.svg",
+      "image_url": "/public/svg/car-2010s.svg",
       "year_start": 2010,
       "year_end": 2023,
-      "highlight": "Power Unit era — 1000+ bhp with energy recovery. DRS introduced 2011. Halo safety device from 2018."
+      "highlight": "Power Unit era — 1000+ bhp with energy recovery. DRS introduced 2011. Halo safety device from 2018.",
+      "safety_milestone": "The Halo — a 7kg titanium bar above the cockpit (2018) — saved Charles Leclerc at Spa 2018 and Romain Grosjean's life at Bahrain 2020."
     }
   ],
   "drivers": [
@@ -560,5 +574,75 @@
     { "year": 2022, "grand_prix": "Monaco Grand Prix", "circuit": "Monaco", "driver_name": "Sergio Perez", "team": "Red Bull", "laps": 64, "race_time": "1:56:30.5" },
     { "year": 2023, "grand_prix": "Monaco Grand Prix", "circuit": "Monaco", "driver_name": "Max Verstappen", "team": "Red Bull", "laps": 78, "race_time": "1:51:12.9" },
     { "year": 2024, "grand_prix": "Monaco Grand Prix", "circuit": "Monaco", "driver_name": "Charles Leclerc", "team": "Ferrari", "laps": 78, "race_time": "1:52:06.0" }
+  ],
+  "qualifying_rules": [
+    {
+      "era_start": 1950,
+      "era_end": 1995,
+      "format_name": "Two 1-Hour Sessions",
+      "description": "Drivers had two separate one-hour qualifying sessions on Friday and Saturday. The single fastest lap across both sessions granted pole position. This format rewarded drivers who could put in a perfect single lap under low fuel loads, but the best time could come from either day.",
+      "sort_order": 1
+    },
+    {
+      "era_start": 2003,
+      "era_end": 2005,
+      "format_name": "Single-Lap Elimination",
+      "description": "Each driver went out alone for exactly one flying lap. Order was determined by championship standings (worst first). Under race fuel loads, this made the lap incredibly strategic — any mistake ended your chance. Widely criticised for poor TV spectacle and dropped after 2005.",
+      "sort_order": 2
+    },
+    {
+      "era_start": 2006,
+      "era_end": 2020,
+      "format_name": "Knockout Q1 / Q2 / Q3",
+      "description": "The current format introduced in 2006. Q1 (18 min): 5 slowest cars eliminated. Q2 (15 min): next 5 eliminated. Q3 (12 min): top 10 shootout for pole. Cars knocked out in Q2 must start on the tyre set that achieved their fastest Q2 lap — creating strategic implications for the race.",
+      "sort_order": 3
+    },
+    {
+      "era_start": 2021,
+      "era_end": null,
+      "format_name": "Sprint Weekends (Hybrid)",
+      "description": "Select rounds feature a 100km Sprint race on Saturday. The Sprint grid is set by a shorter Qualifying Shootout on Friday. Sprint finishes award points (8–1) and in some formats set the Sunday race grid. Highly controversial — purists argue it removes the purity of qualifying as a pure time-trial.",
+      "sort_order": 4
+    }
+  ],
+  "era_regulations": [
+    {
+      "era_start": 1994,
+      "era_end": 2009,
+      "label": "Refueling Era",
+      "refueling_allowed": 1,
+      "avg_pit_seconds": 8.5,
+      "mandatory_stops": 1,
+      "description": "Mid-race refueling was permitted. Strategy revolved around fuel weight — a lighter car is dramatically faster. Teams could run fewer laps on heavy fuel then sprint after a refuel. Pit stops averaged 7–12 seconds. Banned in 2010 due to safety concerns (a fire during refueling at Benetton 1994) and to reduce costs."
+    },
+    {
+      "era_start": 2010,
+      "era_end": null,
+      "label": "Tyre-Only Era",
+      "refueling_allowed": 0,
+      "avg_pit_seconds": 2.4,
+      "mandatory_stops": 1,
+      "description": "Refueling banned from 2010. Cars must start with all fuel needed for the entire race — typically 110kg. Pit stops became pure tyre changes, dropping times to 2–3 seconds (Red Bull achieved a 1.82s record in 2023). Mandatory rule: drivers must use at least two different dry tyre compounds (Soft, Medium, or Hard) per race, forcing at least one stop in dry conditions."
+    }
+  ],
+  "points_systems": [
+    {
+      "year_start": 1950,
+      "year_end": 1990,
+      "system_name": "Classic (8pts for win)",
+      "distribution": "[8,6,4,3,2,1]"
+    },
+    {
+      "year_start": 1991,
+      "year_end": 2009,
+      "system_name": "Mid-Era (10pts for win)",
+      "distribution": "[10,6,4,3,2,1]"
+    },
+    {
+      "year_start": 2010,
+      "year_end": null,
+      "system_name": "Modern (25pts for win)",
+      "distribution": "[25,18,15,12,10,8,6,4,2,1]"
+    }
   ]
 }

@@ -27,5 +27,17 @@ angular.module('f1App')
       }).then(function(res) { return res.data; });
     }
 
-    return { getCars, getDrivers, getWinners, getRegulations, subscribe };
+    function getQualifying() {
+      return $http.get('/api/qualifying').then(function(res) { return res.data; });
+    }
+
+    function getPitRules() {
+      return $http.get('/api/pit-rules').then(function(res) { return res.data; });
+    }
+
+    function getPointsSystems() {
+      return $http.get('/api/points-systems').then(function(res) { return res.data; });
+    }
+
+    return { getCars, getDrivers, getWinners, getRegulations, getQualifying, getPitRules, getPointsSystems, subscribe };
   }]);
