@@ -1,4 +1,4 @@
-<!-- Winners Page: Race winners sortable table -->
+<!-- Winners Page: Race winners sortable table + Modern Points Leaderboard sidebar -->
 <section class="winners-page">
 
   <div class="page-header">
@@ -10,13 +10,13 @@
 
   <div class="container">
 
-    <!-- Search & Filter Bar -->
+    <!-- Controls row -->
     <div class="winners-controls">
       <div class="search-wrap">
         <input type="text"
                id="winners-search"
                class="form-input search-input"
-               placeholder="🔍 Search GP, driver, circuit..."
+           placeholder="Search GP, driver, circuit..."
                ng-model="searchText">
       </div>
       <div class="year-filter-wrap">
@@ -30,64 +30,131 @@
           <option ng-repeat="yr in years" value="{{yr}}">{{yr}}</option>
         </select>
       </div>
+      <!-- Modern Points Toggle -->
+      <button class="pts-toggle-btn"
+              id="pts-toggle"
+              ng-click="toggleModernPoints()"
+              ng-class="{'active': showModernPoints}">
+        <span class="pts-toggle-icon">Stats</span>
+        {{showModernPoints ? 'Hide' : 'Show'}} Modern Points Leaderboard
+      </button>
     </div>
 
-    <!-- Loading -->
-    <div class="loading-bar" ng-show="loading">Loading race data…</div>
+    <!-- Main layout: table + optional sidebar -->
+    <div class="winners-layout" ng-class="{'winners-layout--split': showModernPoints}">
 
-    <!-- Results count -->
-    <p class="results-count" ng-hide="loading">
-      Showing {{(winners | filter:searchText | filter:{year: selectedYear || undefined}).length}} results
-    </p>
+      <!-- LEFT: Year Grid -->
+      <div class="winners-table-col year-grid-container">
 
-    <!-- Table -->
-    <div class="table-wrap" ng-hide="loading">
-      <table class="winners-table">
-        <thead>
-          <tr>
-            <th ng-click="setSort('year')" class="sortable" id="sort-year">
-              Year <span class="sort-icon">{{getSortIcon('year')}}</span>
-            </th>
-            <th ng-click="setSort('grand_prix')" class="sortable" id="sort-gp">
-              Grand Prix <span class="sort-icon">{{getSortIcon('grand_prix')}}</span>
-            </th>
-            <th ng-click="setSort('circuit')" class="sortable" id="sort-circuit">
-              Circuit <span class="sort-icon">{{getSortIcon('circuit')}}</span>
-            </th>
-            <th ng-click="setSort('driver_name')" class="sortable" id="sort-driver">
-              Winner <span class="sort-icon">{{getSortIcon('driver_name')}}</span>
-            </th>
-            <th ng-click="setSort('team')" class="sortable" id="sort-team">
-              Team <span class="sort-icon">{{getSortIcon('team')}}</span>
-            </th>
-            <th id="col-laps">Laps</th>
-            <th id="col-time">Time</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr ng-repeat="winner in winners | filter:searchText | filter:{year: selectedYear || undefined} | orderBy:sortField:sortReverse"
-              ng-class="getRowClass($index)"
-              class="winner-row">
-            <td class="year-cell">
-              <span class="year-badge">{{winner.year}}</span>
-            </td>
-            <td class="gp-cell"><strong>{{winner.grand_prix}}</strong></td>
-            <td class="circuit-cell">{{winner.circuit}}</td>
-            <td class="driver-cell">{{winner.driver_name}}</td>
-            <td class="team-cell">
-              <span class="team-badge">{{winner.team}}</span>
-            </td>
-            <td class="laps-cell">{{winner.laps}}</td>
-            <td class="time-cell">{{winner.race_time}}</td>
-          </tr>
-        </tbody>
-      </table>
+        <!-- Loading -->
+        <div class="loading-bar" ng-show="loading">Loading race data…</div>
+
+        <!-- Empty state -->
+        <div class="empty-state" ng-show="!loading && (decadesList | filter:searchText).length === 0">
+          <p>No results found. Try a different search.</p>
+        </div>
+
+        <!-- Drill-Down Container -->
+        <div class="drilldown-container" ng-hide="loading" ng-switch="viewLevel">
+          
+          <!-- LEVEL 1: Decades Grid -->
+          <div class="drilldown-view decades-view" ng-switch-when="decades">
+            <h3 class="view-title">Select an Era</h3>
+            <div class="decades-grid">
+              <button class="decade-card" 
+                      ng-repeat="dec in decadesList | filter:searchText"
+                      ng-click="selectDecade(dec)">
+                <span class="dc-title">{{dec.decade}}</span>
+                <span class="dc-count">{{dec.totalRaces}} Races</span>
+                <span class="dc-arrow">➔</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- LEVEL 2: Years in Decade -->
+          <div class="drilldown-view years-view" ng-switch-when="years">
+            <button class="btn-back" ng-click="goBack()">
+              <span class="back-icon">←</span> Back to Decades
+            </button>
+            <h3 class="view-title">The {{selectedDecade.decade}}</h3>
+            <div class="years-grid">
+              <button class="year-tile"
+                      ng-repeat="yrGroup in selectedDecade.years | filter:searchText"
+                      ng-click="selectYear(yrGroup)">
+                <span class="yt-year">{{yrGroup.year}}</span>
+                <span class="yt-count">{{yrGroup.races.length}} Races</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- LEVEL 3: Races in Year -->
+          <div class="drilldown-view races-view" ng-switch-when="races">
+            <button class="btn-back" ng-click="goBack()">
+              <span class="back-icon">←</span> Back to {{selectedDecade.decade}}
+            </button>
+            <h3 class="view-title">{{selectedYearGroup.year}} Season</h3>
+            
+            <div class="races-list">
+              <div class="race-card" ng-repeat="race in selectedYearGroup.races | filter:searchText">
+                <div class="rc-header">
+                  <h4>{{race.grand_prix}}</h4>
+                  <span class="rc-circuit">{{race.circuit}}</span>
+                </div>
+                <div class="rc-body">
+                  <div class="rc-winner">
+                    <strong>{{race.driver_name}}</strong>
+                    <span class="rc-team badge">{{race.team}}</span>
+                  </div>
+                  <div class="rc-stats">
+                    <div class="stat-box">
+                      <span class="stat-label">Points</span>
+                      <span class="stat-val accent">{{race.points}}</span>
+                    </div>
+                    <div class="stat-box">
+                      <span class="stat-label">Laps</span>
+                      <span class="stat-val">{{race.laps}}</span>
+                    </div>
+                    <div class="stat-box">
+                      <span class="stat-label">Time</span>
+                      <span class="stat-val">{{race.race_time}}</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- RIGHT: Modern Points Leaderboard Sidebar -->
+      <div class="pts-sidebar" ng-show="showModernPoints">
+        <div class="pts-sidebar__header">
+          <h3>Modern Points <span class="accent">Leaderboard</span></h3>
+          <p class="pts-sidebar__sub">What if all races used today's 25-point system?</p>
+          <div class="pts-legend">
+            <div class="pts-system-info" ng-repeat="sys in pointsSystems">
+              <span class="pts-era">{{sys.year_start}}{{sys.year_end ? '–' + sys.year_end : '+'}}</span>
+              <span class="pts-dist">{{sys.system_name}}</span>
+            </div>
+          </div>
+        </div>
+        <ol class="pts-leaderboard">
+          <li class="pts-row"
+              ng-repeat="entry in modernLeaderboard"
+              ng-class="{'pts-row--gold': $index === 0, 'pts-row--silver': $index === 1, 'pts-row--bronze': $index === 2}">
+            <span class="pts-rank">{{$index + 1}}</span>
+            <span class="pts-driver">{{entry.driver}}</span>
+            <span class="pts-score">
+              <span class="pts-modern">{{entry.modernPts}}</span>
+              <span class="pts-label">modern pts</span>
+            </span>
+            <span class="pts-wins">{{entry.wins}}W</span>
+          </li>
+        </ol>
+      </div>
+
     </div>
-
-    <!-- Empty state -->
-    <div class="empty-state" ng-show="!loading && (winners | filter:searchText | filter:{year: selectedYear || undefined}).length === 0">
-      <p>No results found. Try a different search.</p>
-    </div>
-
   </div>
 </section>

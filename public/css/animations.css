@@ -160,7 +160,7 @@
   animation: none;
 }
 .flag-anim-blue .flag-icon::after {
-  content: '🏎';
+  content: 'CAR';
   position: absolute;
   font-size: 1.2rem;
   animation: carOvertake 2s linear infinite;

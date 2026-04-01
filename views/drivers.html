@@ -32,22 +32,21 @@
            ng-repeat="driver in drivers | eraFilter:selectedEra"
            ng-class="{'driver-card--champion': driver.championships > 0}">
 
-        <!-- Driver Photo: initials avatar shown by default, photo overlaid if it loads -->
+        <!-- Driver Photo -->
         <div class="driver-card__photo-wrap">
-          <!-- Initials avatar always present as background -->
+          <!-- Initials avatar as background fallback -->
           <div class="driver-avatar-fallback">
             {{driver.name.charAt(0)}}
           </div>
-          <!-- Photo: if src fails, becomes transparent revealing avatar -->
           <img class="driver-card__photo"
                ng-src="{{driver.image_url}}"
                alt="{{driver.name}}"
-               onerror="this.style.opacity='0'">
+               onerror="this.style.display='none'">
           <div class="driver-card__overlay">
             <div class="driver-card__stats-overlay">
-              <div class="stat-pill">🏆 {{driver.championships}} titles</div>
-              <div class="stat-pill">🏁 {{driver.wins}} wins</div>
-              <div class="stat-pill">⚡ {{driver.poles || 0}} poles</div>
+              <div class="stat-pill">Titles: {{driver.championships}}</div>
+              <div class="stat-pill">Wins: {{driver.wins}}</div>
+              <div class="stat-pill">Poles: {{driver.poles || 0}}</div>
             </div>
           </div>
         </div>
@@ -63,7 +62,10 @@
           </div>
           <p class="driver-teams">{{driver.teams}}</p>
           <div class="driver-years">{{driver.year_debut}} — {{driver.year_last || 'Present'}}</div>
-
+          <!-- Championship badge (text only, no stars) -->
+          <div class="champ-badge" ng-show="driver.championships > 0">
+            {{driver.championships}}× World Champion
+          </div>
 
         </div>
 

@@ -113,6 +113,18 @@ const server = http.createServer((req, res) => {
     return handleApi(res, 'SELECT * FROM regulations ORDER BY scroll_order');
   }
 
+  if (method === 'GET' && url === '/api/qualifying') {
+    return handleApi(res, 'SELECT * FROM qualifying_rules ORDER BY sort_order');
+  }
+
+  if (method === 'GET' && url === '/api/pit-rules') {
+    return handleApi(res, 'SELECT * FROM era_regulations ORDER BY era_start');
+  }
+
+  if (method === 'GET' && url === '/api/points-systems') {
+    return handleApi(res, 'SELECT * FROM points_systems ORDER BY year_start');
+  }
+
   // --- POST Subscribe ---
   if (method === 'POST' && url === '/subscribe') {
     return handleSubscribe(req, res);
@@ -164,6 +176,6 @@ const server = http.createServer((req, res) => {
 });
 
 server.listen(PORT, () => {
-  console.log(`\n🏎️  F1 Educational Platform running at http://localhost:${PORT}`);
+  console.log(`\nF1 Educational Platform running at http://localhost:${PORT}`);
   console.log(`   API: http://localhost:${PORT}/api/drivers\n`);
 });

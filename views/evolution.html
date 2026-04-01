@@ -1,4 +1,4 @@
-<!-- Evolution Page: Horizontal dot timeline + SVG car viewer -->
+<!-- Evolution Page: Horizontal dot timeline + SVG car viewer + Safety + Engine theming -->
 <section class="evolution-page">
 
   <div class="page-header">
@@ -24,7 +24,9 @@
   </div>
 
   <!-- Car Display -->
-  <div class="car-display container" ng-class="{'transitioning': transitioning}">
+  <div class="car-display container"
+       ng-class="{'transitioning': transitioning}"
+       ng-style="getEraTheme(selectedCar)">
 
     <!-- SVG Viewer -->
     <div class="car-svg-panel">
@@ -43,6 +45,11 @@
     <div class="car-data-card" ng-show="selectedCar">
       <h2 class="car-name">{{selectedCar.name}}</h2>
       <p class="car-highlight">{{selectedCar.highlight}}</p>
+
+      <!-- Engine era badge -->
+      <div class="engine-era-badge" ng-class="getEngineEraClass(selectedCar)">
+        {{getEngineEraLabel(selectedCar)}}
+      </div>
 
       <div class="car-specs">
         <div class="spec-item reveal" ng-style="fieldDelay(0)">
@@ -63,7 +70,7 @@
         </div>
       </div>
 
-      <!-- Progress bar for horsepower relative to max 1050 -->
+      <!-- Power bar -->
       <div class="power-bar-wrap">
         <span class="power-bar-label">Power Output</span>
         <div class="power-bar">
@@ -71,6 +78,16 @@
         </div>
         <span class="power-bar-pct">{{((selectedCar.horsepower / 1050) * 100).toFixed(0)}}%</span>
       </div>
+
+      <!-- Safety Milestone (only shown when present) -->
+      <div class="safety-milestone" ng-show="selectedCar.safety_milestone">
+        <div class="safety-milestone__icon">Safety</div>
+        <div class="safety-milestone__text">
+          <span class="safety-milestone__label">Safety Milestone</span>
+          <p>{{selectedCar.safety_milestone}}</p>
+        </div>
+      </div>
+
     </div>
 
   </div>

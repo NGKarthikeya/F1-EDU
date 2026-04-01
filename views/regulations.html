@@ -1,11 +1,19 @@
-<!-- Regulations Page: Scrollytelling with sticky flag panel -->
+<!-- Regulations Page: Flag Scrollytelling + Qualifying Slider + Pit Lane Flip-Cards -->
 <section class="regulations-page">
 
   <div class="page-header">
     <div class="container">
       <h1 class="page-title">Racing <span class="accent">Regulations</span></h1>
-      <p class="page-sub">Scroll through the flags that govern every race weekend.</p>
+      <p class="page-sub">Scroll through the flags, qualifying eras, and pit lane rules that govern every race weekend.</p>
     </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════
+       SECTION 1: FLAG SCROLLYTELLING
+  ════════════════════════════════════════════ -->
+  <div class="regs-section-title container">
+    <h2>Race Flags</h2>
+    <p>The language of the track — what every flag means when waved.</p>
   </div>
 
   <div class="regs-layout">
@@ -48,6 +56,81 @@
           </div>
         </div>
 
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════
+       SECTION 2: QUALIFYING FORMAT SLIDER
+  ════════════════════════════════════════════ -->
+  <div class="regs-section regs-section--dark" ng-show="qualifyingRules.length">
+    <div class="container">
+      <div class="regs-section-head">
+        <h2 class="section-title">Grid <span class="accent">Formation</span></h2>
+        <p class="section-sub">Qualifying has changed dramatically across the decades. Drag the slider to explore each era.</p>
+      </div>
+
+      <!-- Slider track -->
+      <div class="qual-slider-wrap">
+        <div class="qual-slider-track">
+          <div class="qual-slider-line"></div>
+          <div class="qual-slider-node"
+               ng-repeat="rule in qualifyingRules"
+               ng-class="{'active': activeQual === rule}"
+               ng-click="setQual(rule)"
+               id="qual-node-{{$index}}">
+            <div class="qual-node-dot"></div>
+            <div class="qual-node-year">{{rule.era_start}}{{rule.era_end ? '–' + rule.era_end : '+'}}</div>
+          </div>
+        </div>
+        <!-- Slider input for drag -->
+        <input type="range"
+               class="qual-range"
+               id="qual-range"
+               aria-label="Select qualifying era"
+               min="0"
+               max="{{qualifyingRules.length - 1}}"
+               ng-model="activeQualIdx"
+               ng-change="setQualByIdx(activeQualIdx)">
+      </div>
+
+      <!-- Active format card -->
+      <div class="qual-card" ng-show="activeQual">
+        <div class="qual-card__era-badge">{{activeQual.era_start}}{{activeQual.era_end ? ' – ' + activeQual.era_end : ' – Present'}}</div>
+        <h3 class="qual-card__title">{{activeQual.format_name}}</h3>
+        <p class="qual-card__desc">{{activeQual.description}}</p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════
+       SECTION 3: PIT LANE FLIP CARDS
+  ════════════════════════════════════════════ -->
+  <div class="regs-section" ng-show="pitRules.length">
+    <div class="container">
+      <div class="regs-section-head">
+        <h2 class="section-title">Pit Lane <span class="accent">Rules</span></h2>
+        <p class="section-sub">The ban on mid-race refueling in 2010 transformed strategy forever. Hover to compare the eras.</p>
+      </div>
+
+      <div class="pit-cards-row">
+        <div class="pit-card" ng-repeat="rule in pitRules" ng-class="rule.refueling_allowed ? 'pit-card--fuel' : 'pit-card--tyre'">
+          <div class="pit-card__front">
+            <div class="pit-card__era">{{rule.era_start}}{{rule.era_end ? '–' + rule.era_end : '–Present'}}</div>
+            <div class="pit-card__label">{{rule.label}}</div>
+            <div class="pit-card__time-badge">
+              <span class="pit-time">~{{rule.avg_pit_seconds}}s</span>
+              <span class="pit-time-label">avg pit stop</span>
+            </div>
+            <div class="pit-card__fuel-icon">{{rule.refueling_allowed ? 'Fuel' : 'Tyre'}}</div>
+            <div class="pit-card__hint">Hover for details</div>
+          </div>
+          <div class="pit-card__back">
+            <p>{{rule.description}}</p>
+          </div>
+        </div>
       </div>
 
     </div>
