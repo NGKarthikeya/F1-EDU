@@ -1,0 +1,79 @@
+<!-- Drivers Page: Hall of Fame grid with era filters -->
+<section class="drivers-page">
+
+  <div class="page-header">
+    <div class="container">
+      <h1 class="page-title">Hall of <span class="accent">Fame</span></h1>
+      <p class="page-sub">The legends who defined Formula 1 — from Fangio to Verstappen.</p>
+    </div>
+  </div>
+
+  <div class="container">
+
+    <!-- Era Filter Buttons -->
+    <div class="filter-bar">
+      <button class="filter-btn"
+              ng-repeat="era in eras"
+              ng-class="{'active': selectedEra === era.key}"
+              ng-click="setEra(era.key)"
+              id="filter-{{era.key}}">
+        {{era.label}}
+      </button>
+    </div>
+
+    <!-- Loading state -->
+    <div class="loading-skeleton" ng-show="loading">
+      <div class="skeleton-card" ng-repeat="n in [1,2,3,4,5,6]"></div>
+    </div>
+
+    <!-- Driver Grid -->
+    <div class="drivers-grid" ng-hide="loading">
+      <div class="driver-card"
+           ng-repeat="driver in drivers | eraFilter:selectedEra"
+           ng-class="{'driver-card--champion': driver.championships > 0}">
+
+        <!-- Driver Photo: initials avatar shown by default, photo overlaid if it loads -->
+        <div class="driver-card__photo-wrap">
+          <!-- Initials avatar always present as background -->
+          <div class="driver-avatar-fallback">
+            {{driver.name.charAt(0)}}
+          </div>
+          <!-- Photo: if src fails, becomes transparent revealing avatar -->
+          <img class="driver-card__photo"
+               ng-src="{{driver.image_url}}"
+               alt="{{driver.name}}"
+               onerror="this.style.opacity='0'">
+          <div class="driver-card__overlay">
+            <div class="driver-card__stats-overlay">
+              <div class="stat-pill">🏆 {{driver.championships}} titles</div>
+              <div class="stat-pill">🏁 {{driver.wins}} wins</div>
+              <div class="stat-pill">⚡ {{driver.poles || 0}} poles</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Driver Info -->
+        <div class="driver-card__info">
+          <div class="driver-card__header">
+            <h3 class="driver-name">{{driver.name}}</h3>
+            <img class="flag-icon-sm"
+                 ng-src="https://flagcdn.com/20x15/{{driver.flag_code}}.png"
+                 alt="{{driver.nationality}}"
+                 title="{{driver.nationality}}">
+          </div>
+          <p class="driver-teams">{{driver.teams}}</p>
+          <div class="driver-years">{{driver.year_debut}} — {{driver.year_last || 'Present'}}</div>
+
+
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Empty state -->
+    <div class="empty-state" ng-show="!loading && (drivers | eraFilter:selectedEra).length === 0">
+      <p>No drivers found for this era.</p>
+    </div>
+
+  </div>
+</section>

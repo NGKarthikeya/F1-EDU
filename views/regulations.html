@@ -1,0 +1,56 @@
+<!-- Regulations Page: Scrollytelling with sticky flag panel -->
+<section class="regulations-page">
+
+  <div class="page-header">
+    <div class="container">
+      <h1 class="page-title">Racing <span class="accent">Regulations</span></h1>
+      <p class="page-sub">Scroll through the flags that govern every race weekend.</p>
+    </div>
+  </div>
+
+  <div class="regs-layout">
+
+    <!-- Sticky Left: Active Flag Panel -->
+    <div class="regs-sticky-panel" ng-style="getPanelStyle()">
+      <div class="flag-display" ng-class="'flag-anim-' + activeFlag">
+        <div class="flag-icon">
+          <div class="flag-block" ng-class="'flag-block--' + activeFlag">
+            <div class="flag-inner"></div>
+          </div>
+        </div>
+        <div class="flag-info">
+          <h2 class="flag-name" ng-bind="activeReg.flag_name"></h2>
+          <p class="flag-meaning" ng-bind="activeReg.meaning"></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Scrolling Right: Flag Sections -->
+    <div class="regs-scroll-content">
+
+      <div class="flag-section"
+           ng-repeat="reg in regulations"
+           data-flag="{{reg.flag_color}}"
+           ng-attr-data-flag="{{reg.flag_color}}"
+           ng-class="'flag-section--' + reg.flag_color">
+
+        <div class="flag-section__inner container">
+          <div class="flag-section__visual">
+            <div class="big-flag" ng-class="'big-flag--' + reg.flag_color"></div>
+          </div>
+          <div class="flag-section__text">
+            <div class="flag-number">{{ ($index + 1) < 10 ? '0' + ($index + 1) : ($index + 1) }}</div>
+            <h2>{{reg.flag_name}}</h2>
+            <p>{{reg.meaning}}</p>
+            <div class="flag-tags">
+              <span class="flag-tag" ng-class="'flag-tag--' + reg.flag_color">{{reg.flag_color | uppercase}}</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+
+</section>

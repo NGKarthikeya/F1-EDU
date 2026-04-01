@@ -1,0 +1,108 @@
+<!-- Home Page: Hero, Stats, Era Cards, Newsletter -->
+
+<!-- HERO SECTION -->
+<section class="hero">
+  <div class="hero__speed-lines" aria-hidden="true">
+    <span></span><span></span><span></span><span></span><span></span>
+    <span></span><span></span><span></span><span></span><span></span>
+  </div>
+  <div class="hero__content">
+    <p class="hero__eyebrow">Est. 1950 — The Pinnacle of Motorsport</p>
+    <h1 class="hero__title">
+      <span class="word w1">The</span>
+      <span class="word w2">Complete</span>
+      <span class="word w3">History</span>
+      <span class="word w4">of</span>
+      <span class="word w5">Formula</span>
+      <span class="word w6 accent">1</span>
+    </h1>
+    <p class="hero__subtitle">From Alfa Romeo's dominance in 1950 to the hybrid power unit era — explore 74 seasons of speed, courage, and innovation.</p>
+    <div class="hero__cta">
+      <a href="#!/evolution" class="btn btn--primary">Explore Car Evolution</a>
+      <a href="#!/drivers" class="btn btn--ghost">Hall of Fame</a>
+    </div>
+  </div>
+  <div class="hero__scroll-hint">
+    <span>Scroll</span>
+    <div class="scroll-arrow"></div>
+  </div>
+</section>
+
+<!-- STATS SECTION -->
+<section class="stats-section">
+  <div class="container">
+    <div class="stats-grid">
+      <div class="stat-item" ng-repeat="stat in stats">
+        <span class="stat-number">{{stat.current}}{{stat.suffix}}</span>
+        <span class="stat-label">{{stat.label}}</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ERA PREVIEW CARDS -->
+<section class="eras-section">
+  <div class="container">
+    <h2 class="section-title">7 Eras of <span class="accent">Speed</span></h2>
+    <p class="section-sub">Click any era to explore its defining car and technology.</p>
+    <div class="eras-grid">
+      <a class="era-card" ng-repeat="car in cars" href="#!/evolution" ng-style="{'--accent': 'var(--f1-red)'}">
+        <div class="era-card__badge">{{car.era}}</div>
+        <div class="era-card__visual">
+          <img ng-src="{{car.image_url}}" alt="{{car.name}}" onerror="this.style.display='none'">
+          <div class="era-card__svg-fallback">🏎</div>
+        </div>
+        <div class="era-card__info">
+          <h3>{{car.name}}</h3>
+          <p class="era-card__engine">{{car.engine_type}}</p>
+          <div class="era-card__stats">
+            <span><strong>{{car.horsepower}}</strong> bhp</span>
+            <span><strong>{{car.top_speed}}</strong> km/h</span>
+          </div>
+        </div>
+        <div class="era-card__hover-hint">View Era →</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- NEWSLETTER SECTION -->
+<section class="newsletter-section">
+  <div class="container">
+    <div class="newsletter-box">
+      <!-- Success state -->
+      <div class="newsletter-success" ng-show="subscribed">
+        <div class="checkered-flag-anim" aria-hidden="true">🏁</div>
+        <h3>You're on the grid!</h3>
+        <p>Thanks for subscribing. Race updates incoming.</p>
+      </div>
+
+      <!-- Form state -->
+      <div class="newsletter-form-wrap" ng-hide="subscribed">
+        <h3 class="newsletter-title">Stay on the <span class="accent">Grid</span></h3>
+        <p class="newsletter-sub">Get F1 history drops, season updates, and behind-the-scenes insights.</p>
+        <form name="subForm" class="newsletter-form" ng-submit="subscribe()" novalidate>
+          <div class="form-row">
+            <input type="text"
+              id="sub-name"
+              class="form-input"
+              placeholder="Your Name"
+              ng-model="subscribeForm.name"
+              required>
+            <input type="email"
+              id="sub-email"
+              class="form-input"
+              placeholder="your@email.com"
+              ng-model="subscribeForm.email"
+              required>
+            <button type="submit"
+              id="sub-btn"
+              class="btn btn--primary"
+              ng-disabled="!subscribeForm.email">Subscribe</button>
+          </div>
+          <p class="form-error" ng-show="submitError">{{submitError}}</p>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>

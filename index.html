@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html ng-app="f1App" lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>F1 History — The Complete Educational Platform</title>
+  <meta name="description" content="Explore the evolution of Formula 1 from 1950 to today. Interactive SVG car timeline, regulations guide, legendary drivers, and race history.">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="/public/css/app.css">
+  <link rel="stylesheet" href="/public/css/animations.css">
+
+  <!-- AngularJS 1.8 CDN -->
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular-route.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular-animate.min.js"></script>
+</head>
+<body ng-controller="AppCtrl">
+
+  <!-- Loading Screen -->
+  <div id="loading-screen" class="loading-screen" ng-show="isLoading">
+    <div class="loading-lights">
+      <div class="light" id="l1"></div>
+      <div class="light" id="l2"></div>
+      <div class="light" id="l3"></div>
+      <div class="light" id="l4"></div>
+      <div class="light" id="l5"></div>
+    </div>
+    <p class="loading-text">LIGHTS OUT AND AWAY WE GO</p>
+  </div>
+
+  <!-- Scroll progress bar -->
+  <div id="scroll-progress"></div>
+
+  <!-- Navigation -->
+  <nav class="navbar" ng-class="{'navbar--scrolled': scrolled}">
+    <a class="navbar__brand" href="#!/">
+      <span class="brand-f1">F1</span>
+      <span class="brand-edu">EDU</span>
+    </a>
+    <ul class="navbar__links">
+      <li><a href="#!/" ng-class="{'active': currentRoute === '/'}">Home</a></li>
+      <li><a href="#!/evolution" ng-class="{'active': currentRoute === '/evolution'}">Evolution</a></li>
+      <li><a href="#!/regulations" ng-class="{'active': currentRoute === '/regulations'}">Regulations</a></li>
+      <li><a href="#!/drivers" ng-class="{'active': currentRoute === '/drivers'}">Drivers</a></li>
+      <li><a href="#!/winners" ng-class="{'active': currentRoute === '/winners'}">Winners</a></li>
+    </ul>
+    <button class="navbar__toggle" ng-click="menuOpen = !menuOpen" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <!-- Mobile menu -->
+  <div class="mobile-menu" ng-class="{'open': menuOpen}" ng-click="menuOpen = false">
+    <ul>
+      <li><a href="#!/">Home</a></li>
+      <li><a href="#!/evolution">Evolution</a></li>
+      <li><a href="#!/regulations">Regulations</a></li>
+      <li><a href="#!/drivers">Drivers</a></li>
+      <li><a href="#!/winners">Winners</a></li>
+    </ul>
+  </div>
+
+  <!-- Router Outlet -->
+  <main>
+    <div ng-view class="view-container"></div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer__inner">
+      <p class="footer__brand"><span class="brand-f1">F1</span><span class="brand-edu">EDU</span> Platform</p>
+      <p class="footer__copy">Built with passion for motorsport history. Anti Gravity &copy; 2026</p>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="/public/js/app.js"></script>
+  <script src="/public/js/services/DataService.js"></script>
+  <script src="/public/js/filters/eraFilter.js"></script>
+  <script src="/public/js/controllers/HomeCtrl.js"></script>
+  <script src="/public/js/controllers/EvolutionCtrl.js"></script>
+  <script src="/public/js/controllers/RegulationsCtrl.js"></script>
+  <script src="/public/js/controllers/DriversCtrl.js"></script>
+  <script src="/public/js/controllers/WinnersCtrl.js"></script>
+</body>
+</html>

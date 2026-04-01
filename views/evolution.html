@@ -1,0 +1,85 @@
+<!-- Evolution Page: Horizontal dot timeline + SVG car viewer -->
+<section class="evolution-page">
+
+  <div class="page-header">
+    <div class="container">
+      <h1 class="page-title">Car <span class="accent">Evolution</span></h1>
+      <p class="page-sub">Seven decades of engineering brilliance — click an era or watch it auto-advance.</p>
+    </div>
+  </div>
+
+  <!-- Horizontal Era Timeline -->
+  <div class="timeline-wrap" ng-mouseenter="pauseAuto()">
+    <div class="timeline-track">
+      <div class="timeline-dot"
+           ng-repeat="car in cars"
+           ng-class="{'active': selectedIdx === $index}"
+           ng-click="selectCar(car, $index)"
+           id="dot-{{$index}}"
+           title="{{car.era}}">
+        <span class="dot-label">{{car.era}}</span>
+      </div>
+      <div class="timeline-line"></div>
+    </div>
+  </div>
+
+  <!-- Car Display -->
+  <div class="car-display container" ng-class="{'transitioning': transitioning}">
+
+    <!-- SVG Viewer -->
+    <div class="car-svg-panel">
+      <div class="era-badge-large">{{selectedCar.era}}</div>
+      <div class="car-svg-frame">
+        <img class="car-svg-img"
+             ng-src="{{selectedCar.image_url}}"
+             alt="{{selectedCar.name}}"
+             ng-show="selectedCar">
+        <div class="car-svg-glow"></div>
+      </div>
+      <div class="years-range">{{selectedCar.year_start}} — {{selectedCar.year_end}}</div>
+    </div>
+
+    <!-- Data Card -->
+    <div class="car-data-card" ng-show="selectedCar">
+      <h2 class="car-name">{{selectedCar.name}}</h2>
+      <p class="car-highlight">{{selectedCar.highlight}}</p>
+
+      <div class="car-specs">
+        <div class="spec-item reveal" ng-style="fieldDelay(0)">
+          <span class="spec-label">Engine</span>
+          <span class="spec-value">{{selectedCar.engine_type}}</span>
+        </div>
+        <div class="spec-item reveal" ng-style="fieldDelay(1)">
+          <span class="spec-label">Displacement</span>
+          <span class="spec-value">{{selectedCar.displacement}}</span>
+        </div>
+        <div class="spec-item reveal" ng-style="fieldDelay(2)">
+          <span class="spec-label">Power</span>
+          <span class="spec-value accent">{{selectedCar.horsepower}} bhp</span>
+        </div>
+        <div class="spec-item reveal" ng-style="fieldDelay(3)">
+          <span class="spec-label">Top Speed</span>
+          <span class="spec-value accent">{{selectedCar.top_speed}} km/h</span>
+        </div>
+      </div>
+
+      <!-- Progress bar for horsepower relative to max 1050 -->
+      <div class="power-bar-wrap">
+        <span class="power-bar-label">Power Output</span>
+        <div class="power-bar">
+          <div class="power-bar__fill" ng-style="{'width': ((selectedCar.horsepower / 1050) * 100) + '%'}"></div>
+        </div>
+        <span class="power-bar-pct">{{((selectedCar.horsepower / 1050) * 100).toFixed(0)}}%</span>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Navigation arrows -->
+  <div class="evo-nav container">
+    <button class="evo-btn" ng-click="selectCar(cars[(selectedIdx - 1 + cars.length) % cars.length], (selectedIdx - 1 + cars.length) % cars.length)" ng-mouseenter="pauseAuto()">← Previous Era</button>
+    <span class="evo-counter">{{selectedIdx + 1}} / {{cars.length}}</span>
+    <button class="evo-btn" ng-click="selectCar(cars[(selectedIdx + 1) % cars.length], (selectedIdx + 1) % cars.length)" ng-mouseenter="pauseAuto()">Next Era →</button>
+  </div>
+
+</section>

@@ -1,0 +1,167 @@
+/* ═══════════════════════════════════════════════════════════
+   F1 Educational Platform — animations.css
+   All @keyframes + animation utility classes
+   ═══════════════════════════════════════════════════════════ */
+
+/* ── Core Keyframes ────────────────────────────────────── */
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0);    }
+}
+
+@keyframes wordReveal {
+  from { opacity: 0; transform: translateY(30px); }
+  to   { opacity: 1; transform: translateY(0);    }
+}
+
+@keyframes speedLines {
+  0%   { left: -100%; opacity: 0; }
+  10%  { opacity: 1; }
+  90%  { opacity: 1; }
+  100% { left: 110%;  opacity: 0; }
+}
+
+@keyframes scrollBounce {
+  0%, 100% { transform: rotate(45deg) translateY(0); }
+  50%       { transform: rotate(45deg) translateY(6px); }
+}
+
+/* ── Flag Animations ───────────────────────────────────── */
+
+@keyframes flagWave {
+  0%   { transform: rotate(-5deg) scale(1.0); }
+  50%  { transform: rotate( 5deg) scale(1.05); }
+  100% { transform: rotate(-5deg) scale(1.0); }
+}
+
+@keyframes flagWaveY {
+  0%   { transform: skewX(0deg); }
+  25%  { transform: skewX(-3deg); }
+  75%  { transform: skewX(3deg); }
+  100% { transform: skewX(0deg); }
+}
+
+@keyframes flagWaveInner {
+  0%   { transform: scaleX(1.0) skewY(0deg); }
+  50%  { transform: scaleX(1.02) skewY(1deg); }
+  100% { transform: scaleX(1.0) skewY(0deg); }
+}
+
+@keyframes flagPulse {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.6; box-shadow: 0 0 30px rgba(232,0,45,0.6); }
+}
+
+@keyframes flagOscillate {
+  0%   { transform: rotate(-8deg); }
+  50%  { transform: rotate( 8deg); }
+  100% { transform: rotate(-8deg); }
+}
+
+/* ── Car Overtake (Blue Flag) ──────────────────────────── */
+@keyframes carOvertake {
+  0%   { transform: translateX(-120px); opacity: 0.6; }
+  30%  { opacity: 1; }
+  100% { transform: translateX(120px);  opacity: 0.6; }
+}
+
+/* ── Podium Rise ───────────────────────────────────────── */
+@keyframes riseUp {
+  from { transform: translateY(40px); opacity: 0; }
+  to   { transform: translateY(0);    opacity: 1; }
+}
+
+/* Podium 1-3 stagger on winners table */
+.podium-1 { animation: riseUp 600ms cubic-bezier(0.16,1,0.3,1) 100ms both; }
+.podium-2 { animation: riseUp 600ms cubic-bezier(0.16,1,0.3,1) 200ms both; }
+.podium-3 { animation: riseUp 600ms cubic-bezier(0.16,1,0.3,1) 300ms both; }
+
+/* ── Skeleton Shimmer ──────────────────────────────────── */
+@keyframes shimmer {
+  0%   { background-position: -200% 0; }
+  100% { background-position:  200% 0; }
+}
+
+/* ── Spec Item Reveal (staggered via ng-style) ─────────── */
+.reveal {
+  animation: fadeInUp 500ms cubic-bezier(0.16,1,0.3,1) both;
+}
+
+/* ── View Container transitions ────────────────────────── */
+.view-container { animation: fadeIn 400ms ease both; }
+
+/* ── Red glow pulse (accent elements) ─────────────────── */
+@keyframes glowPulse {
+  0%, 100% { box-shadow: 0 0 10px var(--f1-red-glow); }
+  50%       { box-shadow: 0 0 30px var(--f1-red-glow), 0 0 60px var(--f1-red-glow); }
+}
+
+/* ── Safety Car strobe ─────────────────────────────────── */
+@keyframes safetyCarStrobe {
+  0%, 49%  { background-color: #0057B7; }
+  50%, 100% { background-color: #E8002D; }
+}
+
+/* ── Checkered flag wave (newsletter success) ──────────── */
+@keyframes checkerWave {
+  0%   { transform: rotate(-10deg) scale(0.8); opacity: 0; }
+  30%  { transform: rotate(10deg)  scale(1.2); opacity: 1; }
+  60%  { transform: rotate(-6deg)  scale(1.0); }
+  80%  { transform: rotate(4deg)   scale(1.05); }
+  100% { transform: rotate(0deg)   scale(1.0); }
+}
+.checkered-flag-anim { animation: checkerWave 800ms cubic-bezier(0.34,1.56,0.64,1) both; }
+
+/* ── Timeline dot pulse ────────────────────────────────── */
+@keyframes dotPulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(232,0,45,0.4); }
+  50%       { box-shadow: 0 0 0 8px rgba(232,0,45,0); }
+}
+.timeline-dot.active::before { animation: dotPulse 2s ease-in-out infinite; }
+
+/* ── Hero radial breathe ───────────────────────────────── */
+@keyframes heroBreathe {
+  0%, 100% { transform: scale(1); opacity: 0.12; }
+  50%       { transform: scale(1.05); opacity: 0.18; }
+}
+.hero::before { animation: heroBreathe 6s ease-in-out infinite; }
+
+/* ── Table row hover flash ─────────────────────────────── */
+.winner-row:hover { background: rgba(232,0,45,0.04) !important; }
+
+/* ── Spec reveal utility ───────────────────────────────── */
+.spec-item.reveal { animation: fadeInUp 500ms both; }
+
+/* ── Era card shine effect ─────────────────────────────── */
+.era-card::after {
+  content: '';
+  position: absolute;
+  top: -50%; left: -60%;
+  width: 30%; height: 200%;
+  background: linear-gradient(
+    105deg,
+    transparent 40%,
+    rgba(255,255,255,0.04) 50%,
+    transparent 60%
+  );
+  transform: skewX(-20deg);
+  transition: left 600ms ease;
+}
+.era-card:hover::after { left: 130%; }
+
+/* ── Blue flag car animation ───────────────────────────── */
+.flag-block--blue .flag-inner {
+  animation: none;
+}
+.flag-anim-blue .flag-icon::after {
+  content: '🏎';
+  position: absolute;
+  font-size: 1.2rem;
+  animation: carOvertake 2s linear infinite;
+}

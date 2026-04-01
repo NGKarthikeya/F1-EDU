@@ -1,0 +1,93 @@
+<!-- Winners Page: Race winners sortable table -->
+<section class="winners-page">
+
+  <div class="page-header">
+    <div class="container">
+      <h1 class="page-title">Race <span class="accent">Winners</span></h1>
+      <p class="page-sub">Every Grand Prix victory — from 1950 to 2024.</p>
+    </div>
+  </div>
+
+  <div class="container">
+
+    <!-- Search & Filter Bar -->
+    <div class="winners-controls">
+      <div class="search-wrap">
+        <input type="text"
+               id="winners-search"
+               class="form-input search-input"
+               placeholder="🔍 Search GP, driver, circuit..."
+               ng-model="searchText">
+      </div>
+      <div class="year-filter-wrap">
+        <label for="year-select" class="sr-only">Filter by Year</label>
+        <select class="form-select"
+                id="year-select"
+                title="Filter by Year"
+                aria-label="Filter by Year"
+                ng-model="selectedYear">
+          <option value="">All Years</option>
+          <option ng-repeat="yr in years" value="{{yr}}">{{yr}}</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Loading -->
+    <div class="loading-bar" ng-show="loading">Loading race data…</div>
+
+    <!-- Results count -->
+    <p class="results-count" ng-hide="loading">
+      Showing {{(winners | filter:searchText | filter:{year: selectedYear || undefined}).length}} results
+    </p>
+
+    <!-- Table -->
+    <div class="table-wrap" ng-hide="loading">
+      <table class="winners-table">
+        <thead>
+          <tr>
+            <th ng-click="setSort('year')" class="sortable" id="sort-year">
+              Year <span class="sort-icon">{{getSortIcon('year')}}</span>
+            </th>
+            <th ng-click="setSort('grand_prix')" class="sortable" id="sort-gp">
+              Grand Prix <span class="sort-icon">{{getSortIcon('grand_prix')}}</span>
+            </th>
+            <th ng-click="setSort('circuit')" class="sortable" id="sort-circuit">
+              Circuit <span class="sort-icon">{{getSortIcon('circuit')}}</span>
+            </th>
+            <th ng-click="setSort('driver_name')" class="sortable" id="sort-driver">
+              Winner <span class="sort-icon">{{getSortIcon('driver_name')}}</span>
+            </th>
+            <th ng-click="setSort('team')" class="sortable" id="sort-team">
+              Team <span class="sort-icon">{{getSortIcon('team')}}</span>
+            </th>
+            <th id="col-laps">Laps</th>
+            <th id="col-time">Time</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="winner in winners | filter:searchText | filter:{year: selectedYear || undefined} | orderBy:sortField:sortReverse"
+              ng-class="getRowClass($index)"
+              class="winner-row">
+            <td class="year-cell">
+              <span class="year-badge">{{winner.year}}</span>
+            </td>
+            <td class="gp-cell"><strong>{{winner.grand_prix}}</strong></td>
+            <td class="circuit-cell">{{winner.circuit}}</td>
+            <td class="driver-cell">{{winner.driver_name}}</td>
+            <td class="team-cell">
+              <span class="team-badge">{{winner.team}}</span>
+            </td>
+            <td class="laps-cell">{{winner.laps}}</td>
+            <td class="time-cell">{{winner.race_time}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Empty state -->
+    <div class="empty-state" ng-show="!loading && (winners | filter:searchText | filter:{year: selectedYear || undefined}).length === 0">
+      <p>No results found. Try a different search.</p>
+    </div>
+
+  </div>
+</section>
