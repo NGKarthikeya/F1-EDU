@@ -35,10 +35,10 @@ angular.module('f1App', ['ngRoute', 'ngAnimate'])
     $scope.scrolled  = false;
     $scope.menuOpen  = false;
 
-    // Dismiss loading screen after 2.5s (lights go out animation)
+    // Dismiss loading screen after full red-to-green start sequence
     $timeout(function() {
       $scope.isLoading = false;
-    }, 2500);
+    }, 3300);
 
     // Track current route for nav active states
     $scope.$on('$routeChangeSuccess', function() {

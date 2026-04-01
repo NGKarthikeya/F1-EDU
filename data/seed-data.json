@@ -573,7 +573,8 @@
     { "year": 2021, "grand_prix": "Monaco Grand Prix", "circuit": "Monaco", "driver_name": "Sebastian Vettel", "team": "Aston Martin", "laps": 78, "race_time": "1:46:31.0" },
     { "year": 2022, "grand_prix": "Monaco Grand Prix", "circuit": "Monaco", "driver_name": "Sergio Perez", "team": "Red Bull", "laps": 64, "race_time": "1:56:30.5" },
     { "year": 2023, "grand_prix": "Monaco Grand Prix", "circuit": "Monaco", "driver_name": "Max Verstappen", "team": "Red Bull", "laps": 78, "race_time": "1:51:12.9" },
-    { "year": 2024, "grand_prix": "Monaco Grand Prix", "circuit": "Monaco", "driver_name": "Charles Leclerc", "team": "Ferrari", "laps": 78, "race_time": "1:52:06.0" }
+    { "year": 2024, "grand_prix": "Monaco Grand Prix", "circuit": "Monaco", "driver_name": "Charles Leclerc", "team": "Ferrari", "laps": 78, "race_time": "1:52:06.0" },
+    { "year": 2025, "grand_prix": "Australian Grand Prix", "circuit": "Albert Park", "driver_name": "Max Verstappen", "team": "Red Bull", "laps": 58, "race_time": "1:30:42.6" }
   ],
   "qualifying_rules": [
     {

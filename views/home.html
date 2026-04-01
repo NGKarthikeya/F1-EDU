@@ -2,6 +2,11 @@
 
 <!-- HERO SECTION -->
 <section class="hero">
+  <div class="hero__gradient-bars" aria-hidden="true">
+    <span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="bar"></span>
+    <span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="bar"></span>
+    <span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="bar"></span>
+  </div>
   <div class="hero__speed-lines" aria-hidden="true">
     <span></span><span></span><span></span><span></span><span></span>
     <span></span><span></span><span></span><span></span><span></span>
@@ -40,28 +45,51 @@
   </div>
 </section>
 
-<!-- ERA PREVIEW CARDS -->
-<section class="eras-section">
+<!-- CURRENT TEAMS MASTER-DETAIL -->
+<section class="teams-section">
   <div class="container">
-    <h2 class="section-title">7 Eras of <span class="accent">Speed</span></h2>
-    <p class="section-sub">Click any era to explore its defining car and technology.</p>
-    <div class="eras-grid">
-      <a class="era-card" ng-repeat="car in cars" href="#!/evolution" ng-style="{'--accent': 'var(--f1-red)'}">
-        <div class="era-card__badge">{{car.era}}</div>
-        <div class="era-card__visual">
-          <img ng-src="{{car.image_url}}" alt="{{car.name}}" onerror="this.style.display='none'">
-          <div class="era-card__svg-fallback">Car</div>
+    <h2 class="section-title">Current <span class="accent">Teams</span></h2>
+    <p class="section-sub">Select a constructor to explore its heritage and achievements.</p>
+
+    <div class="teams-master-detail" ng-if="teams.length">
+      <div class="teams-master" role="tablist" aria-label="F1 teams">
+        <button class="team-chip"
+                ng-repeat="team in teams"
+                ng-class="{'active': selectedTeam && selectedTeam.slug === team.slug}"
+                ng-click="selectTeam(team)"
+                id="team-chip-{{team.slug}}"
+                role="tab"
+                aria-selected="{{selectedTeam && selectedTeam.slug === team.slug ? 'true' : 'false'}}">
+          <span class="team-chip__name">{{team.name}}</span>
+          <span class="team-chip__origin">{{team.base}}</span>
+        </button>
+      </div>
+
+      <div class="team-detail" role="tabpanel" ng-if="selectedTeam">
+        <div class="team-detail__head">
+          <h3>{{selectedTeam.name}}</h3>
+          <span class="team-era">{{selectedTeam.founded}}</span>
         </div>
-        <div class="era-card__info">
-          <h3>{{car.name}}</h3>
-          <p class="era-card__engine">{{car.engine_type}}</p>
-          <div class="era-card__stats">
-            <span><strong>{{car.horsepower}}</strong> bhp</span>
-            <span><strong>{{car.top_speed}}</strong> km/h</span>
+
+        <p class="team-heritage">{{selectedTeam.heritage}}</p>
+
+        <div class="team-kpis">
+          <div class="team-kpi">
+            <span class="kpi-label">Constructors' Titles</span>
+            <span class="kpi-value">{{selectedTeam.titles}}</span>
+          </div>
+          <div class="team-kpi">
+            <span class="kpi-label">Race Wins</span>
+            <span class="kpi-value">{{selectedTeam.wins}}</span>
+          </div>
+          <div class="team-kpi">
+            <span class="kpi-label">Championship Era</span>
+            <span class="kpi-value">{{selectedTeam.peakEra}}</span>
           </div>
         </div>
-        <div class="era-card__hover-hint">View Era →</div>
-      </a>
+
+        <a href="#!/winners" class="team-detail__cta">Compare Results in Winners</a>
+      </div>
     </div>
   </div>
 </section>

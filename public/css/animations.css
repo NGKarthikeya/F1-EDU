@@ -27,6 +27,12 @@
   100% { left: 110%;  opacity: 0; }
 }
 
+@keyframes pulseBar {
+  0%   { transform: scaleY(calc(var(--scale, 0.5) * 0.82)); opacity: 0.5; }
+  50%  { transform: scaleY(var(--scale, 0.5)); opacity: 0.92; }
+  100% { transform: scaleY(calc(var(--scale, 0.5) * 0.9)); opacity: 0.7; }
+}
+
 @keyframes scrollBounce {
   0%, 100% { transform: rotate(45deg) translateY(0); }
   50%       { transform: rotate(45deg) translateY(6px); }
