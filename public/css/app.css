@@ -1577,8 +1577,8 @@ ul { list-style: none; }
   position: relative;
   overflow: hidden;
   background-clip: padding-box;
-  backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
 }
 .decade-card::before {
   content: '';
@@ -1641,8 +1641,8 @@ ul { list-style: none; }
   overflow: hidden;
   position: relative;
   background-clip: padding-box;
-  backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
 }
 .year-tile::after {
   content: '';

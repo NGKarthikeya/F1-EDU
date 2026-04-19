@@ -55,7 +55,7 @@
                 ng-click="selectTeam(team)"
                 id="team-chip-{{team.slug}}"
                 role="tab"
-                aria-selected="{{selectedTeam && selectedTeam.slug === team.slug ? 'true' : 'false'}}">
+                ng-attr-aria-selected="{{selectedTeam && selectedTeam.slug === team.slug ? 'true' : 'false'}}">
           <span class="team-chip__name">{{team.name}}</span>
           <span class="team-chip__origin">{{team.base}}</span>
         </button>
