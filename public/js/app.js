@@ -22,9 +22,9 @@ angular.module('f1App', ['ngRoute', 'ngAnimate'])
         templateUrl: 'views/drivers.html',
         controller:  'DriversCtrl'
       })
-      .when('/winners', {
-        templateUrl: 'views/winners.html',
-        controller:  'WinnersCtrl'
+      .when('/tech', {
+        templateUrl: 'views/tech.html',
+        controller:  'TechCtrl'
       })
       .otherwise({ redirectTo: '/' });
   }])

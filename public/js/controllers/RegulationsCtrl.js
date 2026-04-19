@@ -1,4 +1,4 @@
-// RegulationsCtrl — Flag scrollytelling + Qualifying slider + Pit Lane cards
+// RegulationsCtrl — Race Guide: Flag scrollytelling + Qualifying era slider
 angular.module('f1App')
   .controller('RegulationsCtrl', ['$scope', 'DataService', '$timeout', function($scope, DataService, $timeout) {
 
@@ -8,7 +8,6 @@ angular.module('f1App')
     $scope.qualifyingRules = [];
     $scope.activeQual      = null;
     $scope.activeQualIdx   = 0;
-    $scope.pitRules        = [];
 
     // Load all data in parallel
     DataService.getRegulations().then(function(data) {
@@ -28,9 +27,7 @@ angular.module('f1App')
       }
     });
 
-    DataService.getPitRules().then(function(data) {
-      $scope.pitRules = data;
-    });
+
 
     // ─── Flag Scrollytelling ───────────────────
     function setupFlagObserver() {

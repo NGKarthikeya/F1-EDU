@@ -65,31 +65,6 @@ function serveStatic(res, filePath) {
   });
 }
 
-// POST /subscribe handler
-function handleSubscribe(req, res) {
-  let body = '';
-  req.on('data', chunk => { body += chunk.toString(); });
-  req.on('end', async () => {
-    try {
-      const params = new URLSearchParams(body);
-      const name  = params.get('name')  || '';
-      const email = params.get('email') || '';
-
-      if (!email || !email.includes('@')) {
-        return sendError(res, 400, 'Invalid email address');
-      }
-
-      const line = `${new Date().toISOString()},${name},${email}\n`;
-      const filePath = path.join(__dirname, 'data', 'subscribers.txt');
-
-      await fs.promises.appendFile(filePath, line, 'utf8');
-      sendJson(res, { success: true, message: 'Subscribed successfully!' });
-    } catch (err) {
-      console.error('[Subscribe Error]', err.message);
-      sendError(res, 500, err.message);
-    }
-  });
-}
 
 // HTTP Server
 const server = http.createServer((req, res) => {
@@ -105,9 +80,6 @@ const server = http.createServer((req, res) => {
     return handleApi(res, 'SELECT * FROM drivers ORDER BY championships DESC, wins DESC');
   }
 
-  if (method === 'GET' && url === '/api/winners') {
-    return handleApi(res, 'SELECT * FROM race_winners ORDER BY year DESC');
-  }
 
   if (method === 'GET' && url === '/api/regulations') {
     return handleApi(res, 'SELECT * FROM regulations ORDER BY scroll_order');
@@ -121,14 +93,7 @@ const server = http.createServer((req, res) => {
     return handleApi(res, 'SELECT * FROM era_regulations ORDER BY era_start');
   }
 
-  if (method === 'GET' && url === '/api/points-systems') {
-    return handleApi(res, 'SELECT * FROM points_systems ORDER BY year_start');
-  }
 
-  // --- POST Subscribe ---
-  if (method === 'POST' && url === '/subscribe') {
-    return handleSubscribe(req, res);
-  }
 
   // --- Serve root index.html ---
   if (method === 'GET' && url === '/') {

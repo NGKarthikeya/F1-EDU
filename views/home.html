@@ -12,16 +12,12 @@
     <span></span><span></span><span></span><span></span><span></span>
   </div>
   <div class="hero__content">
-    <p class="hero__eyebrow">Est. 1950 — The Pinnacle of Motorsport</p>
+    <p class="hero__eyebrow">The Ultimate Formula 1 Learning Platform</p>
     <h1 class="hero__title">
-      <span class="word w1">The</span>
-      <span class="word w2">Complete</span>
-      <span class="word w3">History</span>
-      <span class="word w4">of</span>
-      <span class="word w5">Formula</span>
-      <span class="word w6 accent">1</span>
+      <span class="word w1">F1</span>
+      <span class="word w2 accent">EDU</span>
     </h1>
-    <p class="hero__subtitle">From Alfa Romeo's dominance in 1950 to the hybrid power unit era — explore 74 seasons of speed, courage, and innovation.</p>
+    <p class="hero__subtitle">Master the sport from the garage to the grid. Explore decades of car evolution, decode race formats and technical regulations, and study the legendary drivers who defined Formula 1.</p>
     <div class="hero__cta">
       <a href="#!/evolution" class="btn btn--primary">Explore Car Evolution</a>
       <a href="#!/drivers" class="btn btn--ghost">Hall of Fame</a>
@@ -88,49 +84,9 @@
           </div>
         </div>
 
-        <a href="#!/winners" class="team-detail__cta">Compare Results in Winners</a>
+        <a href="#!/drivers" class="team-detail__cta">Explore Hall of Fame</a>
       </div>
     </div>
   </div>
 </section>
 
-<!-- NEWSLETTER SECTION -->
-<section class="newsletter-section">
-  <div class="container">
-    <div class="newsletter-box">
-      <!-- Success state -->
-      <div class="newsletter-success" ng-show="subscribed">
-        <div class="checkered-flag-anim" aria-hidden="true">Flag</div>
-        <h3>You're on the grid!</h3>
-        <p>Thanks for subscribing. Race updates incoming.</p>
-      </div>
-
-      <!-- Form state -->
-      <div class="newsletter-form-wrap" ng-hide="subscribed">
-        <h3 class="newsletter-title">Stay on the <span class="accent">Grid</span></h3>
-        <p class="newsletter-sub">Get F1 history drops, season updates, and behind-the-scenes insights.</p>
-        <form name="subForm" class="newsletter-form" ng-submit="subscribe()" novalidate>
-          <div class="form-row">
-            <input type="text"
-              id="sub-name"
-              class="form-input"
-              placeholder="Your Name"
-              ng-model="subscribeForm.name"
-              required>
-            <input type="email"
-              id="sub-email"
-              class="form-input"
-              placeholder="your@email.com"
-              ng-model="subscribeForm.email"
-              required>
-            <button type="submit"
-              id="sub-btn"
-              class="btn btn--primary"
-              ng-disabled="!subscribeForm.email">Subscribe</button>
-          </div>
-          <p class="form-error" ng-show="submitError">{{submitError}}</p>
-        </form>
-      </div>
-    </div>
-  </div>
-</section>

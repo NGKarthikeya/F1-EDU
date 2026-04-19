@@ -66,9 +66,6 @@ angular.module('f1App')
       }
     ];
     $scope.selectedTeam = $scope.teams[0];
-    $scope.subscribeForm = { name: '', email: '' };
-    $scope.subscribed    = false;
-    $scope.submitError   = '';
 
     // Stats for animated counters
     $scope.stats = [
@@ -124,15 +121,4 @@ angular.module('f1App')
       observer.observe(statsEl);
     }, 100);
 
-    // Newsletter submission
-    $scope.subscribe = function() {
-      $scope.submitError = '';
-      DataService.subscribe($scope.subscribeForm.name, $scope.subscribeForm.email)
-        .then(function() {
-          $scope.subscribed = true;
-        })
-        .catch(function(err) {
-          $scope.submitError = 'Something went wrong. Please try again.';
-        });
-    };
   }]);

@@ -1,0 +1,249 @@
+<!-- Car & Tech Page: How the Cars Work -->
+<section class="regulations-page">
+
+  <div class="page-header">
+    <div class="container">
+      <h1 class="page-title">Car &amp; <span class="accent">Tech</span></h1>
+      <p class="page-sub">The machines, the strategy, the technology, and the financial rules that shape every car on the grid.</p>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════
+       SECTION 1: TIRE STRATEGY
+  ════════════════════════════════════════════ -->
+  <div class="regs-section regs-section--dark">
+    <div class="container">
+      <div class="regs-section-head">
+        <h2 class="section-title">Tyre <span class="accent">Strategy</span></h2>
+        <p class="section-sub">Tyre management is the most crucial strategic element of modern F1. Every compound choice is a gamble between grip and durability.</p>
+      </div>
+      <div class="tyre-compounds">
+        <div class="tyre-card tyre-card--soft">
+          <div class="tyre-circle tyre-circle--soft">S</div>
+          <h4>Soft</h4>
+          <p>Highest grip and fastest speeds, but degrades very quickly. Ideal for qualifying and short stints.</p>
+          <div class="tyre-bar-wrap"><div class="tyre-bar tyre-bar--grip" style="width:95%"><span>Grip</span></div></div>
+          <div class="tyre-bar-wrap"><div class="tyre-bar tyre-bar--dur" style="width:25%"><span>Durability</span></div></div>
+        </div>
+        <div class="tyre-card tyre-card--medium">
+          <div class="tyre-circle tyre-circle--medium">M</div>
+          <h4>Medium</h4>
+          <p>The balanced option. Offers a compromise between lap time and tyre life, often the strategic backbone of a race.</p>
+          <div class="tyre-bar-wrap"><div class="tyre-bar tyre-bar--grip" style="width:65%"><span>Grip</span></div></div>
+          <div class="tyre-bar-wrap"><div class="tyre-bar tyre-bar--dur" style="width:60%"><span>Durability</span></div></div>
+        </div>
+        <div class="tyre-card tyre-card--hard">
+          <div class="tyre-circle tyre-circle--hard">H</div>
+          <h4>Hard</h4>
+          <p>Lowest grip but lasts the longest. Used for extended stints to minimise pit stops and maximise track position.</p>
+          <div class="tyre-bar-wrap"><div class="tyre-bar tyre-bar--grip" style="width:35%"><span>Grip</span></div></div>
+          <div class="tyre-bar-wrap"><div class="tyre-bar tyre-bar--dur" style="width:95%"><span>Durability</span></div></div>
+        </div>
+      </div>
+      <div class="tyre-rule-box">
+        <span class="tyre-rule-icon">📋</span>
+        <div>
+          <strong>The Golden Rule:</strong> In a fully dry race, every driver must make <strong>at least one pit stop</strong> and use <strong>at least two different tyre compounds</strong>. If it rains, Intermediate (green) or Wet (blue) tyres are used and the mandatory stop rule is dropped.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════
+       SECTION 2: PIT STOP RULES
+  ════════════════════════════════════════════ -->
+  <div class="regs-section">
+    <div class="container">
+      <div class="regs-section-head">
+        <h2 class="section-title">Pit Stop <span class="accent">Rules</span></h2>
+        <p class="section-sub">A pit stop is a choreographed ballet that can make or break a race — often completed in under three seconds.</p>
+      </div>
+      <div class="pit-rule-cards">
+        <div class="pit-rule-card">
+          <div class="pit-rule-card__number">01</div>
+          <h4>No Refuelling</h4>
+          <p>Since 2010, refuelling during a race has been <strong>banned for safety reasons</strong>. Cars start the Grand Prix carrying all the fuel needed for the entire 300 km race. Pit stops are strictly for changing tyres or replacing a damaged front wing.</p>
+        </div>
+        <div class="pit-rule-card">
+          <div class="pit-rule-card__number">02</div>
+          <h4>Pit Lane Speed Limit</h4>
+          <p>Drivers must adhere to a strict pit lane speed limit — usually <strong>80 km/h</strong>. Exceeding it by even a fraction results in an instant time penalty, no matter how good the pit stop itself was.</p>
+        </div>
+        <div class="pit-rule-card">
+          <div class="pit-rule-card__number">03</div>
+          <h4>The Modern Pit Stop</h4>
+          <p>With no refuelling, the entire focus is on tyre changes. Modern F1 teams can change all four tyres in <strong>under 2.5 seconds</strong> — a feat requiring precise choreography from over 20 mechanics.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════
+       SECTION 3: PIT LANE ERAS (existing flip cards)
+  ════════════════════════════════════════════ -->
+  <div class="regs-section regs-section--dark" ng-show="pitRules.length">
+    <div class="container">
+      <div class="regs-section-head">
+        <h2 class="section-title">Pit Lane <span class="accent">Eras</span></h2>
+        <p class="section-sub">The ban on mid-race refueling in 2010 transformed strategy forever. Hover to compare the eras.</p>
+      </div>
+      <div class="pit-cards-row">
+        <div class="pit-card" ng-repeat="rule in pitRules" ng-class="rule.refueling_allowed ? 'pit-card--fuel' : 'pit-card--tyre'">
+          <div class="pit-card__front">
+            <div class="pit-card__era">{{rule.era_start}}{{rule.era_end ? '–' + rule.era_end : '–Present'}}</div>
+            <div class="pit-card__label">{{rule.label}}</div>
+            <div class="pit-card__time-badge">
+              <span class="pit-time">~{{rule.avg_pit_seconds}}s</span>
+              <span class="pit-time-label">avg pit stop</span>
+            </div>
+            <div class="pit-card__fuel-icon">{{rule.refueling_allowed ? 'Fuel' : 'Tyre'}}</div>
+            <div class="pit-card__hint">Hover for details</div>
+          </div>
+          <div class="pit-card__back">
+            <p>{{rule.description}}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════
+       SECTION 4: THE MODERN POWER UNIT
+  ════════════════════════════════════════════ -->
+  <div class="regs-section">
+    <div class="container">
+      <div class="regs-section-head">
+        <h2 class="section-title">The Modern <span class="accent">Power Unit</span></h2>
+        <p class="section-sub">F1 engines have evolved dramatically — from massive V12s to today's extraordinarily complex hybrid systems that push the boundaries of what's possible.</p>
+      </div>
+      <div class="pu-layout">
+        <div class="pu-stat-card">
+          <div class="pu-stat-card__value accent">1.6L</div>
+          <div class="pu-stat-card__label">Turbocharged V6 ICE</div>
+          <p>The internal combustion core of the power unit. Small and efficient by design, it works in concert with the electrical systems to deliver maximum performance.</p>
+        </div>
+        <div class="pu-stat-card pu-stat-card--split">
+          <div class="pu-split-bar">
+            <div class="pu-split-half pu-split-half--ice">50%<span>ICE</span></div>
+            <div class="pu-split-half pu-split-half--elec">50%<span>Electric</span></div>
+          </div>
+          <div class="pu-stat-card__label">2026 Power Split</div>
+          <p>From 2026, power output is split equally between the combustion engine and a massively upgraded electrical battery system — a landmark shift for the sport.</p>
+        </div>
+        <div class="pu-stat-card">
+          <div class="pu-stat-card__value accent">100%</div>
+          <div class="pu-stat-card__label">Sustainable Fuel</div>
+          <p>The entire grid now runs on 100% advanced sustainable fuels, marking a dramatic shift away from the traditional fossil fuel chemistry wars of earlier decades.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════
+       SECTION 5: ACTIVE AERODYNAMICS & OVERTAKING
+  ════════════════════════════════════════════ -->
+  <div class="regs-section regs-section--dark">
+    <div class="container">
+      <div class="regs-section-head">
+        <h2 class="section-title">Active Aero &amp; <span class="accent">Overtaking</span></h2>
+        <p class="section-sub">Aerodynamics dictate how fast a car can corner. The 2026 regulations introduced a revolution in how this performance is deployed.</p>
+      </div>
+      <div class="aero-cards">
+        <div class="aero-card">
+          <div class="aero-card__tag">2026 Regulation</div>
+          <h4>Active Aerodynamics</h4>
+          <p>Cars now feature <strong>movable flaps</strong> on both the front and rear wings. In corners, they remain closed to provide maximum downforce and grip. On straights, they mechanically flatten out to <strong>reduce drag</strong> and increase top speed.</p>
+        </div>
+        <div class="aero-card aero-card--boost">
+          <div class="aero-card__tag aero-card__tag--boost">Replaces DRS</div>
+          <h4>Overtake Mode (Boost Button)</h4>
+          <p>The traditional DRS system has evolved. When a driver is within <strong>one second of the car ahead</strong>, they unlock a manual "Boost Button" — delivering a strategic burst of extra electrical power to facilitate an overtake.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════
+       SECTION 6: KEY ON-TRACK RULES
+  ════════════════════════════════════════════ -->
+  <div class="regs-section">
+    <div class="container">
+      <div class="regs-section-head">
+        <h2 class="section-title">Key <span class="accent">On-Track Rules</span></h2>
+        <p class="section-sub">The regulations that every driver must respect during the race — violate them and face the stewards.</p>
+      </div>
+      <div class="ontrack-rules">
+        <div class="rule-item">
+          <div class="rule-item__icon">📐</div>
+          <div class="rule-item__content">
+            <h4>Track Limits</h4>
+            <p>Drivers must keep at least one wheel within the white lines that define the track. Repeatedly driving completely off the track will result in a <strong>time penalty</strong> or lap time deletion.</p>
+          </div>
+        </div>
+        <div class="rule-item">
+          <div class="rule-item__icon">🔒</div>
+          <div class="rule-item__content">
+            <h4>Parc Fermé</h4>
+            <p>Translating to "closed park," this rule kicks in the moment a car leaves the pit lane in Qualifying. From that moment on, teams are <strong>strictly forbidden</strong> from making major mechanical or aerodynamic changes to the car before the race.</p>
+          </div>
+        </div>
+        <div class="rule-item">
+          <div class="rule-item__icon">🛡️</div>
+          <div class="rule-item__content">
+            <h4>Defending Rules</h4>
+            <p>A driver may make only <strong>one change of direction</strong> to defend their position. Moving back to the racing line after defending is permitted, but a second block move is penalised.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════
+       SECTION 7: THE COST CAP
+  ════════════════════════════════════════════ -->
+  <div class="regs-section regs-section--dark cost-cap-section">
+    <div class="container">
+      <div class="regs-section-head">
+        <h2 class="section-title">The Cost Cap <span class="accent">(Financial Regulations)</span></h2>
+        <p class="section-sub">For most of F1's history, the wealthiest teams could spend unlimited amounts of money, leading to eras of total dominance.</p>
+      </div>
+      <div class="cost-cap-layout">
+        <div class="cost-cap-card">
+          <div class="cost-cap-card__icon">⚖️</div>
+          <h4>The Spending Limit</h4>
+          <p>F1 now enforces a strict <strong>budget cap</strong> that limits exactly how much a team can spend on car development, manufacturing, and personnel. It is designed to level the playing field between the legendary front-runners and the smaller, privateer teams.</p>
+        </div>
+        <div class="cost-cap-timeline">
+          <div class="cost-cap-era">
+            <span class="cce-years">Pre-2021</span>
+            <span class="cce-label">Unlimited Spending</span>
+            <p>The wealthiest teams spent hundreds of millions more than their rivals, creating periods of near-total dominance like the Mercedes era of the 2010s.</p>
+          </div>
+          <div class="cost-cap-arrow">→</div>
+          <div class="cost-cap-era cost-cap-era--now">
+            <span class="cce-years accent">2021–Present</span>
+            <span class="cce-label">Budget Cap Era</span>
+            <p>A strict ceiling on spending has compressed the performance gap between teams, resulting in more competitive championships throughout the grid.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════
+       CROSS-PAGE CTA
+  ════════════════════════════════════════════ -->
+  <div class="page-cta-bridge page-cta-bridge--back">
+    <div class="container">
+      <div class="pcb-inner">
+        <div class="pcb-text">
+          <div class="pcb-label">Part 1 of 2</div>
+          <h3>Back to the Race Guide</h3>
+          <p>Revisit the championships, race format, points system, and safety car rules.</p>
+        </div>
+        <a href="#!/regulations" class="pcb-btn pcb-btn--back">← Race Guide</a>
+      </div>
+    </div>
+  </div>
+
+</section>

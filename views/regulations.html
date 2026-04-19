@@ -1,23 +1,50 @@
-<!-- Regulations Page: Flag Scrollytelling + Qualifying Slider + Pit Lane Flip-Cards -->
+<!-- Race Guide Page: How the Sport Works -->
 <section class="regulations-page">
 
   <div class="page-header">
     <div class="container">
-      <h1 class="page-title">Racing <span class="accent">Regulations</span></h1>
-      <p class="page-sub">Scroll through the flags, qualifying eras, and pit lane rules that govern every race weekend.</p>
+      <h1 class="page-title">Race <span class="accent">Guide</span></h1>
+      <p class="page-sub">The championships, the race weekend format, the scoring system, and the language of the track — everything you need to follow a Grand Prix.</p>
     </div>
   </div>
 
   <!-- ═══════════════════════════════════════════
-       SECTION 1: FLAG SCROLLYTELLING
+       SECTION 1: THE TWO CHAMPIONSHIPS
   ════════════════════════════════════════════ -->
-  <div class="regs-section-title container">
-    <h2>Race Flags</h2>
-    <p>The language of the track — what every flag means when waved.</p>
+  <div class="regs-section regs-section--dark">
+    <div class="container">
+      <div class="regs-section-head">
+        <h2 class="section-title">The Two <span class="accent">Championships</span></h2>
+        <p class="section-sub">F1 isn't just about individual glory — it's a team sport with two separate titles up for grabs every season.</p>
+      </div>
+      <div class="champ-cards">
+        <div class="champ-card">
+          <div class="champ-card__icon">🏆</div>
+          <h3 class="champ-card__title">Drivers' Championship</h3>
+          <p class="champ-card__desc">Awarded to the individual driver who accumulates the most points over the entire season. This is the title that immortalises legends like Schumacher, Senna, and Hamilton.</p>
+          <div class="champ-card__badge">Individual</div>
+        </div>
+        <div class="champ-card champ-card--constructors">
+          <div class="champ-card__icon">🏗️</div>
+          <h3 class="champ-card__title">Constructors' Championship</h3>
+          <p class="champ-card__desc">Awarded to the team — such as Ferrari, Mercedes, or McLaren — with the most combined points from both their drivers. This title determines how the sport's massive prize pool is distributed.</p>
+          <div class="champ-card__badge champ-card__badge--team">Team</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════
+       SECTION 2: RACE FLAGS (existing scrollytelling)
+  ════════════════════════════════════════════ -->
+  <div class="container" style="padding-top: 80px;">
+    <div class="regs-section-head">
+      <h2 class="section-title">Race <span class="accent">Flags</span></h2>
+      <p class="section-sub">The language of the track — what every flag means when waved.</p>
+    </div>
   </div>
 
   <div class="regs-layout">
-
     <!-- Sticky Left: Active Flag Panel -->
     <div class="regs-sticky-panel" ng-style="getPanelStyle()">
       <div class="flag-display" ng-class="'flag-anim-' + activeFlag">
@@ -35,13 +62,11 @@
 
     <!-- Scrolling Right: Flag Sections -->
     <div class="regs-scroll-content">
-
       <div class="flag-section"
            ng-repeat="reg in regulations"
            data-flag="{{reg.flag_color}}"
            ng-attr-data-flag="{{reg.flag_color}}"
            ng-class="'flag-section--' + reg.flag_color">
-
         <div class="flag-section__inner container">
           <div class="flag-section__visual">
             <div class="big-flag" ng-class="'big-flag--' + reg.flag_color"></div>
@@ -55,23 +80,153 @@
             </div>
           </div>
         </div>
-
       </div>
-
     </div>
   </div>
 
   <!-- ═══════════════════════════════════════════
-       SECTION 2: QUALIFYING FORMAT SLIDER
+       SECTION 3: RACE WEEKEND FORMAT
   ════════════════════════════════════════════ -->
-  <div class="regs-section regs-section--dark" ng-show="qualifyingRules.length">
+  <div class="regs-section regs-section--dark">
+    <div class="container">
+      <div class="regs-section-head">
+        <h2 class="section-title">The Race Weekend <span class="accent">Format</span></h2>
+        <p class="section-sub">A standard Grand Prix takes place over three days, each with a critical role in determining the race outcome.</p>
+      </div>
+      <div class="weekend-timeline">
+        <div class="wt-day">
+          <div class="wt-day__label">Friday</div>
+          <div class="wt-events">
+            <div class="wt-event">
+              <div class="wt-event__dot wt-event__dot--practice"></div>
+              <div class="wt-event__content">
+                <h4>Free Practice 1 &amp; 2</h4>
+                <p>Two 60-minute sessions for teams to test setups, analyse tyre degradation, and gather crucial data about the circuit.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="wt-day">
+          <div class="wt-day__label">Saturday</div>
+          <div class="wt-events">
+            <div class="wt-event">
+              <div class="wt-event__dot wt-event__dot--practice"></div>
+              <div class="wt-event__content">
+                <h4>Free Practice 3</h4>
+                <p>A final 60-minute preparation session before the critical qualifying battle.</p>
+              </div>
+            </div>
+            <div class="wt-event">
+              <div class="wt-event__dot wt-event__dot--qualifying"></div>
+              <div class="wt-event__content">
+                <h4>Qualifying (Q1 → Q2 → Q3)</h4>
+                <p>A knockout session where the slowest 5 are eliminated in Q1 and Q2, leaving 10 drivers to fight for <strong>Pole Position</strong> — first place on the starting grid — in Q3.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="wt-day">
+          <div class="wt-day__label">Sunday</div>
+          <div class="wt-events">
+            <div class="wt-event">
+              <div class="wt-event__dot wt-event__dot--race"></div>
+              <div class="wt-event__content">
+                <h4>The Race</h4>
+                <p>A sprint to the finish lasting ~90 minutes. Drivers complete a set number of laps totalling roughly <strong>305 km</strong> (Monaco is the famous exception).</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="sprint-callout">
+        <div class="sprint-callout__icon">⚡</div>
+        <div class="sprint-callout__content">
+          <h4>Sprint Weekends</h4>
+          <p>Six times per year, F1 runs a "Sprint" format. Practice time is replaced with a <strong>Sprint Shootout</strong> qualifying and a <strong>100 km mini-race</strong> on Saturday that awards extra championship points.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════
+       SECTION 4: THE POINTS SYSTEM
+  ════════════════════════════════════════════ -->
+  <div class="regs-section">
+    <div class="container">
+      <div class="regs-section-head">
+        <h2 class="section-title">The Points <span class="accent">System</span></h2>
+        <p class="section-sub">Points are everything — but only the top finishers score them. The bonus point for fastest lap has recently been removed.</p>
+      </div>
+      <div class="points-tables-wrap">
+        <div class="points-table-block">
+          <h3 class="points-table-title">Standard Race — Top 10 Score</h3>
+          <div class="points-grid">
+            <div class="pts-cell pts-cell--gold"><span class="pts-pos">1st</span><span class="pts-val">25</span></div>
+            <div class="pts-cell pts-cell--silver"><span class="pts-pos">2nd</span><span class="pts-val">18</span></div>
+            <div class="pts-cell pts-cell--bronze"><span class="pts-pos">3rd</span><span class="pts-val">15</span></div>
+            <div class="pts-cell"><span class="pts-pos">4th</span><span class="pts-val">12</span></div>
+            <div class="pts-cell"><span class="pts-pos">5th</span><span class="pts-val">10</span></div>
+            <div class="pts-cell"><span class="pts-pos">6th</span><span class="pts-val">8</span></div>
+            <div class="pts-cell"><span class="pts-pos">7th</span><span class="pts-val">6</span></div>
+            <div class="pts-cell"><span class="pts-pos">8th</span><span class="pts-val">4</span></div>
+            <div class="pts-cell"><span class="pts-pos">9th</span><span class="pts-val">2</span></div>
+            <div class="pts-cell"><span class="pts-pos">10th</span><span class="pts-val">1</span></div>
+          </div>
+        </div>
+        <div class="points-table-block">
+          <h3 class="points-table-title">Sprint Race — Top 8 Score</h3>
+          <div class="points-grid points-grid--sprint">
+            <div class="pts-cell pts-cell--gold"><span class="pts-pos">1st</span><span class="pts-val">8</span></div>
+            <div class="pts-cell pts-cell--silver"><span class="pts-pos">2nd</span><span class="pts-val">7</span></div>
+            <div class="pts-cell pts-cell--bronze"><span class="pts-pos">3rd</span><span class="pts-val">6</span></div>
+            <div class="pts-cell"><span class="pts-pos">4th</span><span class="pts-val">5</span></div>
+            <div class="pts-cell"><span class="pts-pos">5th</span><span class="pts-val">4</span></div>
+            <div class="pts-cell"><span class="pts-pos">6th</span><span class="pts-val">3</span></div>
+            <div class="pts-cell"><span class="pts-pos">7th</span><span class="pts-val">2</span></div>
+            <div class="pts-cell"><span class="pts-pos">8th</span><span class="pts-val">1</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════
+       SECTION 5: SAFETY CARS
+  ════════════════════════════════════════════ -->
+  <div class="regs-section regs-section--dark">
+    <div class="container">
+      <div class="regs-section-head">
+        <h2 class="section-title">Safety Cars &amp; Race <span class="accent">Neutralization</span></h2>
+        <p class="section-sub">When danger strikes — a crash, heavy rain, or track debris — the race is neutralized to protect drivers and marshals.</p>
+      </div>
+      <div class="safety-cards">
+        <div class="safety-card">
+          <div class="safety-card__header safety-card__header--sc">
+            <span class="safety-badge">SC</span>
+            <h3>Safety Car</h3>
+          </div>
+          <p>A high-performance road car driven by a professional leads the F1 pack at a reduced speed. <strong>Overtaking is strictly forbidden</strong> and the time gaps between all cars are erased — bunching the pack up for a restart. This is the most dramatic neutralization event in F1.</p>
+        </div>
+        <div class="safety-card">
+          <div class="safety-card__header safety-card__header--vsc">
+            <span class="safety-badge safety-badge--vsc">VSC</span>
+            <h3>Virtual Safety Car</h3>
+          </div>
+          <p>For less severe incidents, no physical car comes out. Drivers must immediately reduce their speed by a set percentage and <strong>maintain their current time gaps</strong> to the cars around them. This preserves the gap structure while the incident is cleared.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════
+       SECTION 6: QUALIFYING FORMAT SLIDER (existing)
+  ════════════════════════════════════════════ -->
+  <div class="regs-section" ng-show="qualifyingRules.length">
     <div class="container">
       <div class="regs-section-head">
         <h2 class="section-title">Grid <span class="accent">Formation</span></h2>
         <p class="section-sub">Qualifying has changed dramatically across the decades. Drag the slider to explore each era.</p>
       </div>
-
-      <!-- Slider track -->
       <div class="qual-slider-wrap">
         <div class="qual-slider-track">
           <div class="qual-slider-line"></div>
@@ -84,7 +239,6 @@
             <div class="qual-node-year">{{rule.era_start}}{{rule.era_end ? '–' + rule.era_end : '+'}}</div>
           </div>
         </div>
-        <!-- Slider input for drag -->
         <input type="range"
                class="qual-range"
                id="qual-range"
@@ -94,45 +248,27 @@
                ng-model="activeQualIdx"
                ng-change="setQualByIdx(activeQualIdx)">
       </div>
-
-      <!-- Active format card -->
       <div class="qual-card" ng-show="activeQual">
         <div class="qual-card__era-badge">{{activeQual.era_start}}{{activeQual.era_end ? ' – ' + activeQual.era_end : ' – Present'}}</div>
         <h3 class="qual-card__title">{{activeQual.format_name}}</h3>
         <p class="qual-card__desc">{{activeQual.description}}</p>
       </div>
-
     </div>
   </div>
 
   <!-- ═══════════════════════════════════════════
-       SECTION 3: PIT LANE FLIP CARDS
+       CROSS-PAGE CTA
   ════════════════════════════════════════════ -->
-  <div class="regs-section" ng-show="pitRules.length">
+  <div class="page-cta-bridge">
     <div class="container">
-      <div class="regs-section-head">
-        <h2 class="section-title">Pit Lane <span class="accent">Rules</span></h2>
-        <p class="section-sub">The ban on mid-race refueling in 2010 transformed strategy forever. Hover to compare the eras.</p>
-      </div>
-
-      <div class="pit-cards-row">
-        <div class="pit-card" ng-repeat="rule in pitRules" ng-class="rule.refueling_allowed ? 'pit-card--fuel' : 'pit-card--tyre'">
-          <div class="pit-card__front">
-            <div class="pit-card__era">{{rule.era_start}}{{rule.era_end ? '–' + rule.era_end : '–Present'}}</div>
-            <div class="pit-card__label">{{rule.label}}</div>
-            <div class="pit-card__time-badge">
-              <span class="pit-time">~{{rule.avg_pit_seconds}}s</span>
-              <span class="pit-time-label">avg pit stop</span>
-            </div>
-            <div class="pit-card__fuel-icon">{{rule.refueling_allowed ? 'Fuel' : 'Tyre'}}</div>
-            <div class="pit-card__hint">Hover for details</div>
-          </div>
-          <div class="pit-card__back">
-            <p>{{rule.description}}</p>
-          </div>
+      <div class="pcb-inner">
+        <div class="pcb-text">
+          <div class="pcb-label">Part 2 of 2</div>
+          <h3>Continue to Car &amp; Tech</h3>
+          <p>Dive into tyres, pit stops, hybrid power units, active aerodynamics, and the cost cap.</p>
         </div>
+        <a href="#!/tech" class="pcb-btn">Car &amp; Tech →</a>
       </div>
-
     </div>
   </div>
 
